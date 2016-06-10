@@ -8,6 +8,8 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 "general
+let mapleader = ","
+let maplocalleader = "\\"
 
  " let Vundle manage Vundle
  " required! 
@@ -31,7 +33,10 @@ Bundle 'mileszs/ack.vim'
 Bundle 'vim-ruby/vim-ruby'
 
 "Rspec syntax highlighting
-"Bundle 'Keithbsmiley/rspec.vim'
+Bundle 'Keithbsmiley/rspec.vim'
+
+"vim ruby capybara
+Bundle 'https://github.com/tonekk/vim-ruby-capybara.git'
 
 Bundle 'tpope/vim-rails'
 
@@ -44,13 +49,23 @@ Bundle 'xsbeats/vim-blade'
 Bundle "mattn/emmet-vim"
 imap <D-y> <C-y>,
 
-" Javascript 
+" Javascript
 Bundle 'pangloss/vim-javascript'
 "for js library [jQuery, underscore.js, lo-dash, Backbone.js, prelude.ls, AngularJS, RequireJS, Sugar.js, Jasmine]
 Bundle 'https://github.com/othree/javascript-libraries-syntax.vim.git'
-let g:used_javascript_libs = 'underscore,backbone,jquery'
+let g:used_javascript_libs = 'underscore,backbone,jquery,angularjs,requirejs'
 Bundle 'vim-coffee-script'
 "Bundle 'itspriddle/vim-jquery'
+
+"JavaScript ES6
+Plugin 'isRuslan/vim-es6'
+
+"NodeJS
+Bundle 'moll/vim-node'
+
+"JSON
+Bundle 'elzr/vim-json'
+"let g:vim_json_syntax_conceal = 0
 
 " Web (generic)
 Bundle 'HTML-AutoCloseTag'
@@ -60,7 +75,9 @@ Bundle 'HTML-AutoCloseTag'
 Bundle 'git://github.com/csexton/snipmate.vim.git'
 
 "project tree
-Bundle "https://github.com/scrooloose/nerdtree.git" 
+Bundle "https://github.com/scrooloose/nerdtree.git"
+nmap <silent> <unique> <leader>n :NERDTreeToggle<CR>
+nmap <silent> <unique> <leader>/ :NERDTreeFind<CR>
 
 "finder for tree
 "Bundle 'kien/ctrlp.vim'
@@ -74,12 +91,31 @@ Bundle 'git://github.com/altercation/vim-colors-solarized.git'
 "vDebug for xdebug
 "Bundle 'joonty/vdebug.git'
 
+"mustache and handlebars mode
+Plugin 'mustache/vim-mustache-handlebars'
+
+" Dockerfile
+Plugin 'ekalinin/Dockerfile.vim'
+
+"elixir
+Plugin 'elixir-lang/vim-elixir'
+
+"folding settings
+set foldmethod=indent   "fold based on indent
+set foldnestmax=10      "deepest fold is 10 levels
+set nofoldenable        "dont fold by default
+set foldlevel=0
+
 syntax enable
 set background=dark
 colorscheme solarized
 "set guifont=Monaco\ Bold\ 12
+"set fuoptions=maxvert,maxhorz " fullscreen options (MacVim only), resized window when changed to fullscreen
 set guifont=Monaco:h15
-set guioptions=egmrt  " hide the gui menubar
+"set transparency=7
+
+"set guioptions-=T " remove toolbar
+"set guioptions=egmrt  " hide the gui menubar
 
 let g:solarized_termtrans = 1
 
@@ -109,8 +145,12 @@ set incsearch
 " highlighing search
 set hlsearch
 
+
 " Ignore case when searching.
 set ignorecase
+
+" Ignore case when searching lowercase
+set smartcase
 
 " Показывать все возможные кандидаты для выбора при авто-завершении команд в командной строке
 set wildmenu
@@ -128,6 +168,9 @@ set undolevels=1000
 " spell checking on
 set spelllang=en_us
 syntax on
+
+" syntax for jbuilder
+au BufNewFile,BufRead *.jbuilder set filetype=rb
 
 "Включаем отображение выполняемой в данный момент команды в правом нижнем углу экрана
 set showcmd
@@ -156,6 +199,17 @@ set ruler
  "nmap <C-V> "+gP
  "imap <C-V> <ESC><C-V>i
  "vmap <C-C> "+y
+
+"Space - Page Down
+nmap <silent> <unique> <Space> <PageDown>
+
+"Shift + Space - Page Down
+nmap <silent> <unique> <S-Space> <PageUp>
+
+nnoremap <A-C-Left> :tabprevious<CR>
+nnoremap <A-C-Right> :tabnext<CR>
+nnoremap <silent> <A-C-Up> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
+nnoremap <silent> <A-C-Down> :execute 'silent! tabmove ' . tabpagenr()<CR>
 
  "Highlighting tabs (1 is red can change 'T' '>' )
 highlight SpecialKey ctermfg=8
@@ -195,10 +249,13 @@ vmap <F11> <Esc>:w<CR>
 " Add paste from buffer in inserrt mode
 imap <D-p> <C-R>"
 
+" Inser New Line
+map <S-Enter> O<ESC>
+map <Enter> o<ESC>
 
 "CommandT with CTRL  C
 "nmap <D-t> :CommandT<CR>
-"nmap <C-F> :Ack 
+map <leader>a :Ack!
 
 :command WQ wq
 :command Wq wq
