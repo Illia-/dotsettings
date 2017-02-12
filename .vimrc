@@ -3,102 +3,121 @@ filetype off                   " required!
 
 " Перенос строк по словам, а не по буквам
 set linebreak
-
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
 "general
 let mapleader = ","
 let maplocalleader = "\\"
 
- " let Vundle manage Vundle
- " required! 
-Bundle 'gmarik/vundle'
+"the_silver_searcher, use Ag
+"let g:ackprg = 'ag --nogroup --nocolor --column'
 
+" Specify a directory for plugins
+call plug#begin('~/.vim/plugged')
 
-Bundle 'tpope/vim-surround'
-
-Bundle 'tpope/vim-endwise'
-
-Bundle 'tsaleh/vim-supertab'
-
-Bundle 'wincent/Command-T'
-"let g:CommandTHighlightColor="rgba(0,255,0,0.5)"
-Bundle 'twe4ked/vim-peepopen'
-
-Bundle 'mileszs/ack.vim'
-
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-endwise'
+Plug 'tsaleh/vim-supertab'
+Plug 'vim-ruby/vim-ruby'
 "rails
-
-Bundle 'vim-ruby/vim-ruby'
-
 "Rspec syntax highlighting
-Bundle 'Keithbsmiley/rspec.vim'
+Plug 'Keithbsmiley/rspec.vim'
 
-"vim ruby capybara
-Bundle 'https://github.com/tonekk/vim-ruby-capybara.git'
-
-Bundle 'tpope/vim-rails'
-
-Bundle 'tpope/vim-haml'
-
-"Vim syntax highlighting for Blade templates.
-Bundle 'xsbeats/vim-blade'
+Plug 'tpope/vim-rails'
 
 "Emmet-vim
-Bundle "mattn/emmet-vim"
+Plug 'mattn/emmet-vim'
 imap <D-y> <C-y>,
 
+
 " Javascript
-Bundle 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript'
 "for js library [jQuery, underscore.js, lo-dash, Backbone.js, prelude.ls, AngularJS, RequireJS, Sugar.js, Jasmine]
-Bundle 'https://github.com/othree/javascript-libraries-syntax.vim.git'
-let g:used_javascript_libs = 'underscore,backbone,jquery,angularjs,requirejs'
-Bundle 'vim-coffee-script'
-"Bundle 'itspriddle/vim-jquery'
+Plug 'https://github.com/othree/javascript-libraries-syntax.vim.git'
+let g:used_javascript_libs = 'underscore,jquery,angularjs'
+Plug 'vim-coffee-script'
 
 "JavaScript ES6
-Plugin 'isRuslan/vim-es6'
-
-"NodeJS
-Bundle 'moll/vim-node'
+Plug 'isRuslan/vim-es6'
 
 "JSON
-Bundle 'elzr/vim-json'
-"let g:vim_json_syntax_conceal = 0
+Plug 'elzr/vim-json'
 
 " Web (generic)
-Bundle 'HTML-AutoCloseTag'
-"Bundle 'git://github.com/docunext/closetag.vim.git'
+Plug 'HTML-AutoCloseTag'
 
 "CSS editor
-Bundle 'git://github.com/csexton/snipmate.vim.git'
+Plug 'git://github.com/csexton/snipmate.vim.git'
 
 "project tree
-Bundle "https://github.com/scrooloose/nerdtree.git"
+Plug 'https://github.com/scrooloose/nerdtree.git'
+"open a NERDTree automatically when vim starts up if no files were specified
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 nmap <silent> <unique> <leader>n :NERDTreeToggle<CR>
 nmap <silent> <unique> <leader>/ :NERDTreeFind<CR>
+
+"Intelligent autocompletion for quotes, parenthesis, brackets etc
+Plug 'git://github.com/Raimondi/delimitMate.git'
+
+"solorized
+Plug 'git://github.com/altercation/vim-colors-solarized.git'
+
+" Dockerfile
+Plug 'ekalinin/Dockerfile.vim'
+
+"elixir
+Plug 'elixir-lang/vim-elixir'
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
+"check https://github.com/junegunn/fzf/wiki/On-MacVim-with-iTerm2
+let g:fzf_launcher = "/usr/local/bin/fzf_launcher.sh %s"
+" Default fzf layout
+" - down / up / left / right
+let g:fzf_layout = { 'down': '~70%' }
+
+
+" Initialize plugin system
+call plug#end()
+
+
+"Bundle 'wincent/Command-T'
+"let g:CommandTHighlightColor="rgba(0,255,0,0.5)"
+"Bundle 'twe4ked/vim-peepopen'
+
+"Bundle 'mileszs/ack.vim'
+
+
+
+
+"vim ruby capybara
+"Bundle 'https://github.com/tonekk/vim-ruby-capybara.git'
+
+
+"Bundle 'tpope/vim-haml'
+
+"Vim syntax highlighting for Blade templates.
+"Bundle 'xsbeats/vim-blade'
+
+
+
+"NodeJS
+"Bundle 'moll/vim-node'
+
+"let g:vim_json_syntax_conceal = 0
+
+"Bundle 'git://github.com/docunext/closetag.vim.git'
+
 
 "finder for tree
 "Bundle 'kien/ctrlp.vim'
 
-"Intelligent autocompletion for quotes, parenthesis, brackets etc
-Bundle 'git://github.com/Raimondi/delimitMate.git'
-
-"solorized
-Bundle 'git://github.com/altercation/vim-colors-solarized.git'
 
 "vDebug for xdebug
 "Bundle 'joonty/vdebug.git'
 
 "mustache and handlebars mode
-Plugin 'mustache/vim-mustache-handlebars'
+"Plugin 'mustache/vim-mustache-handlebars'
 
-" Dockerfile
-Plugin 'ekalinin/Dockerfile.vim'
-
-"elixir
-Plugin 'elixir-lang/vim-elixir'
 
 "folding settings
 set foldmethod=indent   "fold based on indent
@@ -109,7 +128,6 @@ set foldlevel=0
 syntax enable
 set background=dark
 colorscheme solarized
-"set guifont=Monaco\ Bold\ 12
 "set fuoptions=maxvert,maxhorz " fullscreen options (MacVim only), resized window when changed to fullscreen
 set guifont=Monaco:h15
 "set transparency=7
@@ -121,30 +139,24 @@ let g:solarized_termtrans = 1
 
 filetype plugin indent on     " required!
 
-"Размер сдвига при нажатии на клавиши «<» и «>»
 set shiftwidth=2
-
-"Размер табуляции
 set tabstop=2
 
 "To insert space characters whenever the tab key is pressed
 set expandtab
-
-"
 set smarttab
 
 "makes the spaces feel like real tabs
 set softtabstop=2
 
-"Копирует отступ от предыдущей строки » наследовать отступы предыдущей строки
+"inherit indents of previous line
 set autoindent
 
-" Search as you type.
+"Search as you type.
 set incsearch
 
-" highlighing search
+"highlighing search
 set hlsearch
-
 
 " Ignore case when searching.
 set ignorecase
@@ -178,22 +190,20 @@ set showcmd
 "Показывать строку с позицией курсора
 set ruler
 
-"
- " Brief help
- " :BundleList          - list configured bundles
- " :BundleInstall(!)    - install(update) bundles
- " :BundleSearch(!) foo - search(or refresh cache first) for foo
- " :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
- "
- " see :h vundle for more details or wiki for FAQ
- " NOTE: comments after Bundle command are not allowed..
- "
+"PlugInstall [name ...] [#threads]	Install plugins
+"PlugUpdate [name ...] [#threads]	Install or update plugins
+"PlugClean[!]	Remove unused directories (bang version will clean without prompt)
+"PlugUpgrade	Upgrade vim-plug itself
+"PlugStatus	Check the status of plugins
+
+
+
+
  " Easier moving in tabs and windows
    map <C-J> <C-W>j<C-W>_
    map <C-K> <C-W>k<C-W>_
    map <C-L> <C-W>l<C-W>_
    map <C-H> <C-W>h<C-W>_
- "                          map <C-K> <C-W>k<C-W>_
 
  "copy paste
  "nmap <C-V> "+gP
@@ -211,12 +221,12 @@ nnoremap <A-C-Right> :tabnext<CR>
 nnoremap <silent> <A-C-Up> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
 nnoremap <silent> <A-C-Down> :execute 'silent! tabmove ' . tabpagenr()<CR>
 
- "Highlighting tabs (1 is red can change 'T' '>' )
+"Highlighting tabs (1 is red can change 'T' '>' )
 highlight SpecialKey ctermfg=8
 set list
 set listchars=trail:·,tab:»·
 
-" tab navigation
+"tab navigation
 nnoremap <A-F1> 1gt
 nnoremap <A-F2> 2gt
 nnoremap <A-F3> 3gt
@@ -234,18 +244,6 @@ nnoremap <A-F0> 10gt
 nmap <C-x> :tabclose<CR>
 imap <C-x> <Esc>:tabclose<CR>
 
-map <D-t> <Plug>PeepOpen
-if has("gui_macvim")
-  macmenu &File.New\ Tab key=<nop>
-  map <D-t> <Plug>PeepOpen
-  macmenu File.Print key=<nop>
-end
-
-"Сохранить файл по <F11>
-nmap <F11> :w<CR>
-imap <F11> <Esc>:w<CR>
-vmap <F11> <Esc>:w<CR>
-
 " Add paste from buffer in inserrt mode
 imap <D-p> <C-R>"
 
@@ -254,11 +252,10 @@ map <S-Enter> O<ESC>
 map <Enter> o<ESC>
 
 "CommandT with CTRL  C
-"nmap <D-t> :CommandT<CR>
-map <leader>a :Ack!
+map <D-F> :Files<CR>
+map <leader>a :Ag 
 
 :command WQ wq
 :command Wq wq
 :command W w
 :command Q q
-"if has("mac") || has("macunix")    endif
