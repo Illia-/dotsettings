@@ -43,6 +43,7 @@ Plug 'elzr/vim-json'
 
 " Web (generic)
 Plug 'HTML-AutoCloseTag'
+Plug 'tpope/vim-haml'
 
 "CSS editor
 Plug 'git://github.com/csexton/snipmate.vim.git'
@@ -93,7 +94,6 @@ call plug#end()
 "Bundle 'https://github.com/tonekk/vim-ruby-capybara.git'
 
 
-"Bundle 'tpope/vim-haml'
 
 "Vim syntax highlighting for Blade templates.
 "Bundle 'xsbeats/vim-blade'
@@ -259,3 +259,5 @@ map <leader>a :Ag
 :command Wq wq
 :command W w
 :command Q q
+
+nnoremap <leader>p :let @* = expand("%:p").":".line('.')<cr>
