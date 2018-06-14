@@ -45,7 +45,7 @@ Plug 'HTML-AutoCloseTag'
 Plug 'tpope/vim-haml'
 
 "CSS editor
-Plug 'git://github.com/csexton/snipmate.vim.git'
+"Plug 'git://github.com/csexton/snipmate.vim.git'
 
 "project tree
 Plug 'https://github.com/scrooloose/nerdtree.git'
