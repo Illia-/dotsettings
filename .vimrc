@@ -15,7 +15,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-endwise'
-Plug 'tsaleh/vim-supertab'
+Plug 'ervandew/supertab'
 Plug 'vim-ruby/vim-ruby'
 "rails
 "Rspec syntax highlighting
@@ -33,7 +33,6 @@ Plug 'pangloss/vim-javascript'
 "for js library [jQuery, underscore.js, lo-dash, Backbone.js, prelude.ls, AngularJS, RequireJS, Sugar.js, Jasmine]
 Plug 'https://github.com/othree/javascript-libraries-syntax.vim.git'
 let g:used_javascript_libs = 'underscore,jquery,angularjs'
-Plug 'vim-coffee-script'
 
 "JavaScript ES6
 Plug 'isRuslan/vim-es6'
@@ -66,7 +65,10 @@ Plug 'git://github.com/altercation/vim-colors-solarized.git'
 Plug 'ekalinin/Dockerfile.vim'
 
 "elixir
-Plug 'elixir-lang/vim-elixir'
+"Plug 'elixir-lang/vim-elixir'
+
+"Golang
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
