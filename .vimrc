@@ -41,7 +41,7 @@ Plug 'isRuslan/vim-es6'
 Plug 'elzr/vim-json'
 
 " Web (generic)
-Plug 'HTML-AutoCloseTag'
+Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-haml'
 
 "CSS editor
@@ -82,6 +82,7 @@ let g:fzf_layout = { 'down': '~70%' }
 " Initialize plugin system
 call plug#end()
 
+Plug 'avakhov/vim-yaml'
 
 "Bundle 'wincent/Command-T'
 "let g:CommandTHighlightColor="rgba(0,255,0,0.5)"
@@ -226,7 +227,11 @@ nnoremap <silent> <A-C-Down> :execute 'silent! tabmove ' . tabpagenr()<CR>
 "Highlighting tabs (1 is red can change 'T' '>' )
 highlight SpecialKey ctermfg=8
 set list
-set listchars=trail:·,tab:»·
+set listchars=trail:·,tab:»·,nbsp:~
+
+augroup golang
+  autocmd BufRead *.go set nolist
+augroup END
 
 "tab navigation
 nnoremap <A-F1> 1gt
