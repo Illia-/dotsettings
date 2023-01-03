@@ -1,14 +1,11 @@
 set nocompatible               " be iMproved Включаем несовместимость настроек с предшественником Vi
 filetype off                   " required!
 
-" Перенос строк по словам, а не по буквам
 set linebreak
 "general
 let mapleader = ","
 let maplocalleader = "\\"
 
-"the_silver_searcher, use Ag
-"let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
@@ -32,7 +29,7 @@ imap <D-y> <C-y>,
 Plug 'pangloss/vim-javascript'
 "for js library [jQuery, underscore.js, lo-dash, Backbone.js, prelude.ls, AngularJS, RequireJS, Sugar.js, Jasmine]
 Plug 'https://github.com/othree/javascript-libraries-syntax.vim.git'
-let g:used_javascript_libs = 'underscore,jquery,angularjs'
+let g:used_javascript_libs = 'react'
 
 "JavaScript ES6
 Plug 'isRuslan/vim-es6'
@@ -42,7 +39,7 @@ Plug 'elzr/vim-json'
 
 " Web (generic)
 Plug 'alvan/vim-closetag'
-Plug 'tpope/vim-haml'
+"Plug 'tpope/vim-haml'
 
 "CSS editor
 "Plug 'git://github.com/csexton/snipmate.vim.git'
@@ -56,21 +53,15 @@ nmap <silent> <unique> <leader>n :NERDTreeToggle<CR>
 nmap <silent> <unique> <leader>/ :NERDTreeFind<CR>
 
 "Intelligent autocompletion for quotes, parenthesis, brackets etc
-Plug 'git://github.com/Raimondi/delimitMate.git'
+Plug 'https://github.com/Raimondi/delimitMate.git'
 
 "solorized
-Plug 'git://github.com/altercation/vim-colors-solarized.git'
+Plug 'https://github.com/altercation/vim-colors-solarized.git'
 
 " Dockerfile
 Plug 'ekalinin/Dockerfile.vim'
 
-"elixir
-"Plug 'elixir-lang/vim-elixir'
-
-"Golang
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 "check https://github.com/junegunn/fzf/wiki/On-MacVim-with-iTerm2
 let g:fzf_launcher = "/usr/local/bin/fzf_launcher.sh %s"
@@ -78,49 +69,10 @@ let g:fzf_launcher = "/usr/local/bin/fzf_launcher.sh %s"
 " - down / up / left / right
 let g:fzf_layout = { 'down': '~70%' }
 
-
 " Initialize plugin system
 call plug#end()
 
 Plug 'avakhov/vim-yaml'
-
-"Bundle 'wincent/Command-T'
-"let g:CommandTHighlightColor="rgba(0,255,0,0.5)"
-"Bundle 'twe4ked/vim-peepopen'
-
-"Bundle 'mileszs/ack.vim'
-
-
-
-
-"vim ruby capybara
-"Bundle 'https://github.com/tonekk/vim-ruby-capybara.git'
-
-
-
-"Vim syntax highlighting for Blade templates.
-"Bundle 'xsbeats/vim-blade'
-
-
-
-"NodeJS
-"Bundle 'moll/vim-node'
-
-"let g:vim_json_syntax_conceal = 0
-
-"Bundle 'git://github.com/docunext/closetag.vim.git'
-
-
-"finder for tree
-"Bundle 'kien/ctrlp.vim'
-
-
-"vDebug for xdebug
-"Bundle 'joonty/vdebug.git'
-
-"mustache and handlebars mode
-"Plugin 'mustache/vim-mustache-handlebars'
-
 
 "folding settings
 set foldmethod=indent   "fold based on indent
@@ -167,7 +119,7 @@ set ignorecase
 " Ignore case when searching lowercase
 set smartcase
 
-" Показывать все возможные кандидаты для выбора при авто-завершении команд в командной строке
+" show all available commands for autocomplete
 set wildmenu
 
 " Show editing mode
@@ -176,7 +128,7 @@ set showmode
 "numbers
 set number
 
-"Размер истории для отмены правок
+" history size for revert changes
 set undolevels=1000
 
 
@@ -187,10 +139,10 @@ syntax on
 " syntax for jbuilder
 au BufNewFile,BufRead *.jbuilder set filetype=rb
 
-"Включаем отображение выполняемой в данный момент команды в правом нижнем углу экрана
+" show executed command in buttom right corner
 set showcmd
 
-"Показывать строку с позицией курсора
+" show row with corsor position
 set ruler
 
 "PlugInstall [name ...] [#threads]	Install plugins
@@ -229,11 +181,7 @@ highlight SpecialKey ctermfg=8
 set list
 set listchars=trail:·,tab:»·,nbsp:~
 
-augroup golang
-  autocmd BufRead *.go set nolist
-augroup END
-
-"tab navigation
+" tab navigation
 nnoremap <A-F1> 1gt
 nnoremap <A-F2> 2gt
 nnoremap <A-F3> 3gt
@@ -245,7 +193,7 @@ nnoremap <A-F8> 8gt
 nnoremap <A-F9> 9gt
 nnoremap <A-F0> 10gt
 
-"Открытие\закрытие новой вкладки по CTRL+T и CTRL+W
+" open close new tab with CTRL+T & CTRL+W
 "nmap <C-t> :tabnew<CR>
 "imap <C-t> <Esc>:tabnew<CR>a
 nmap <C-x> :tabclose<CR>
